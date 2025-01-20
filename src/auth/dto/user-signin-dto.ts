@@ -1,7 +1,7 @@
 import { IsEmail,IsString,IsNotEmpty , MinLength} from "class-validator";
 
 export class SignInUser_Dto {
-    @IsString
+    @IsString()
     @IsNotEmpty()
     @MinLength(8)
     username : string
