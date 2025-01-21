@@ -9,7 +9,7 @@ export class AuthController {
     @Post('register')
     register_user(@Body() SignUpUser_Dto:SignUpUser_Dto ,
     @Res({ passthrough: true }) response: any, ){
-        return this.AuthServices.SignUpUser(SignUpUser_Dto.username,SignUpUser_Dto.password,SignUpUser_Dto.email)
+        return this.AuthServices.SignUpUser(SignUpUser_Dto.username,SignUpUser_Dto.email,SignUpUser_Dto.password)
     }
 
     @Post('login')
