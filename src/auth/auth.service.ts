@@ -2,6 +2,7 @@ import { Injectable,Body } from '@nestjs/common';
 import { PrismaService  } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { Response } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -43,6 +44,15 @@ export class AuthService {
    
         return {
             message: 'Login successfully!',
+        }
+    }
+
+    async SignOutUser(response:Response){
+        console.log(response.cookie)
+        response.clearCookie('access_token');
+   
+        return {
+            message: 'Logged Out  successfully!',
         }
     }
 }
