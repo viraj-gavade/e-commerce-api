@@ -48,7 +48,6 @@ export class AuthService {
     }
 
     async SignOutUser(response:Response){
-        console.log(response.cookie)
         response.clearCookie('access_token');
    
         return {
