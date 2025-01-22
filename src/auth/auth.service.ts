@@ -8,28 +8,27 @@ import { Response } from 'express';
 export class AuthService {
     constructor(private readonly prisma : PrismaService,private readonly JwtService:JwtService){}
 
-    async SignUpUser(username:string,email:string,password:string){
+    async SignUpUser(username:string,email:string,password:string,address:string,firstName:string,lastName:string,phone:string){
         const HashedPassword = await bcrypt.hash(password,10)
         const User = await this.prisma.user.create(
             {
                 data:{
                    username,
                    email,
-                   password:HashedPassword
+                   password:HashedPassword,
+                   address,
+                   firstName,
+                   lastName,
+                   phone
+
                 }
             }
         )
         return User
     }
 
-    async SignInUser(username:string,password:string,response:any){
-        const User = await this.prisma.user.findUnique(
-            {
-                where:{
-                    username:username
-                }
-            }
-        )
+    async SignInUser(email:string,password:string,response:any){
+       const User = await this.prisma.user.findUnique({where:{email}})
         if (!User) {
             return response.status(401).json({ message: 'Invalid email or password' });
         }
