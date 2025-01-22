@@ -7,8 +7,12 @@ import { UserModule } from './user/user.module';
 import { AuthMiddleware  } from './auth/auth.middleware';
 import { NestModule } from '@nestjs/common';
 import { MiddlewareConsumer } from '@nestjs/common';
+import { OrderModule } from './order/order.module';
+import { OrderItemModule } from './order-item/order-item.module';
+import { ProductModule } from './product/product.module';
+import { CategoryModule } from './category/category.module';
 @Module({
-  imports: [PrismaModule, AuthModule, UserModule],
+  imports: [PrismaModule, AuthModule, UserModule, OrderModule,OrderItemModule , OrderItemModule, ProductModule,CategoryModule],
   controllers: [AppController],
   providers: [AppService],
 })

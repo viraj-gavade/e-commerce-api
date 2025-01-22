@@ -68,10 +68,15 @@ model Product {
   OrderItem   OrderItem[]
 }
 model Category {
-  id          Int       @id @default(autoincrement()) 
-  name        String    @unique                     
-  description String?                              
-  createdAt   DateTime  @default(now())             
-  updatedAt   DateTime  @updatedAt                  
-  products    Product[]                           
+  id          Int         @id @default(autoincrement())
+  name        String      @unique
+  description String?
+  parentId    Int?        // Self-referencing field for parent category
+  parent      Category?   @relation("CategoryToParent", fields: [parentId], references: [id])
+  subcategories Category[] @relation("CategoryToParent")
+  products    Product[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 }
+
+

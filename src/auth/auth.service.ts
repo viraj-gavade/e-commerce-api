@@ -33,7 +33,6 @@ export class AuthService {
             return response.status(401).json({ message: 'Invalid email or password' });
         }
         const isPasswordCorrect = await bcrypt.compare(password, User.password);
-        console.log(isPasswordCorrect)
         if (!isPasswordCorrect) {
             return response.status(401).json({ message: 'Invalid email or password' });
         }
