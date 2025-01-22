@@ -9,26 +9,26 @@ export class CategoryController {
 
   @Post('add')
   create(@Body() createCategoryDto: CreateCategoryDto) {
-    return this.categoryService.create(createCategoryDto);
+    return this.categoryService.Create_Categories(createCategoryDto);
   }
 
   @Get()
   findAll() {
-    return this.categoryService.CategoryfindAll()
+    return this.categoryService.findAll_Categories()
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.categoryService.findOne(+id);
+    return this.categoryService.findOne_Categories(+id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
-    return this.categoryService.update(+id, updateCategoryDto);
+    return this.categoryService.update_Categories(+id, updateCategoryDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.categoryService.remove(+id);
+    return this.categoryService.remove_Categories(+id);
   }
 }

@@ -9,26 +9,26 @@ export class OrderItemController {
 
   @Post()
   create(@Body() createOrderItemDto: CreateOrderItemDto) {
-    return this.orderItemService.create(createOrderItemDto);
+    return this.orderItemService.create_orderItem(createOrderItemDto);
   }
 
   @Get()
   findAll() {
-    return this.orderItemService.findAll();
+    return this.orderItemService.findAll_orderItem();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.orderItemService.findOne(+id);
+    return this.orderItemService.findOne_orderItem(+id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateOrderItemDto: UpdateOrderItemDto) {
-    return this.orderItemService.update(+id, updateOrderItemDto);
+    return this.orderItemService.update_orderItem(+id, updateOrderItemDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.orderItemService.remove(+id);
+    return this.orderItemService.remove_orderItem(+id);
   }
 }

@@ -4,23 +4,23 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 
 @Injectable()
 export class OrderService {
-  create(createOrderDto: CreateOrderDto) {
+  create_Order(createOrderDto: CreateOrderDto) {
     return 'This action adds a new order';
   }
 
-  findAll() {
+  findAll_Order() {
     return `This action returns all order`;
   }
 
-  findOne(id: number) {
+  findOne_Order(id: number) {
     return `This action returns a #${id} order`;
   }
 
-  update(id: number, updateOrderDto: UpdateOrderDto) {
+  update_Order(id: number, updateOrderDto: UpdateOrderDto) {
     return `This action updates a #${id} order`;
   }
 
-  remove(id: number) {
+  remove_Order(id: number) {
     return `This action removes a #${id} order`;
   }
 }

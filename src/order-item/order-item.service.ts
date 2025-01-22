@@ -4,23 +4,23 @@ import { UpdateOrderItemDto } from './dto/update-order-item.dto';
 
 @Injectable()
 export class OrderItemService {
-  create(createOrderItemDto: CreateOrderItemDto) {
+  create_orderItem(createOrderItemDto: CreateOrderItemDto) {
     return 'This action adds a new orderItem';
   }
 
-  findAll() {
+  findAll_orderItem() {
     return `This action returns all orderItem`;
   }
 
-  findOne(id: number) {
+  findOne_orderItem(id: number) {
     return `This action returns a #${id} orderItem`;
   }
 
-  update(id: number, updateOrderItemDto: UpdateOrderItemDto) {
+  update_orderItem(id: number, updateOrderItemDto: UpdateOrderItemDto) {
     return `This action updates a #${id} orderItem`;
   }
 
-  remove(id: number) {
+  remove_orderItem(id: number) {
     return `This action removes a #${id} orderItem`;
   }
 }
