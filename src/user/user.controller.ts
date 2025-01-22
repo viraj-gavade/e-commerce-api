@@ -6,10 +6,18 @@ import { UpdateUserDto } from './dto/update-user-dto';
 export class UserController {
     constructor(private readonly UserService:UserService){}
 
+  
     @Get()
     async find_all_users(){
         return this.UserService.getAllUsers()
     }
+
+    
+    @Get()
+    async find_single_user(@Param() user_id: number){
+        return this.UserService.getSingleUser(user_id)
+    }
+    
     
     @Delete()
     async delete_user(@Param() user_id: number){

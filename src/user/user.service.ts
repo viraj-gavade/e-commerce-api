@@ -9,11 +9,12 @@ export class UserService {
 
 
     async getSingleUser(user_id:number){
+        console.log(user_id)
         return this.PrismaService.user.findUnique({where:{id:user_id}})
     }
 
     async getAllUsers(){
-        return this.PrismaService.user.findMany()
+        return this.PrismaService.user.findMany({})
     }
 
     async deleteUser(user_id:number){
