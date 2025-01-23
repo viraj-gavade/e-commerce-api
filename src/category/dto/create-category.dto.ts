@@ -22,4 +22,6 @@ export class CreateCategoryDto {
   @Type(() => CreateSubCategoryDto)
   @IsOptional()
   subcategories?: CreateSubCategoryDto[]; // Optional array of subcategories
+
+  parentId : number
 }

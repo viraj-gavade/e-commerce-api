@@ -10,23 +10,24 @@ export class CategoryService {
     return this.PrismaServices.category.create({data:{
       name:createCategoryDto.name,
       description:createCategoryDto.description,
+      parentId:createCategoryDto.parentId
     }})
 
   }
 
   findAll_Categories() {
-    return `This action returns all category`;
+   return this.PrismaServices.category.findMany({where:{parentId:null}})
   }
 
   findOne_Categories(id: number) {
-    return `This action returns a #${id} category`;
+    return this.PrismaServices.category.findUnique({where:{id}})
   }
 
   update_Categories(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+    return this.PrismaServices.category.update({where:{id},data:updateCategoryDto})
   }
 
   remove_Categories(id: number) {
-    return `This action removes a #${id} category`;
+    return this.PrismaServices.category.delete({where:{id}})
   }
 }
