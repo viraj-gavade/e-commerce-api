@@ -7,7 +7,10 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class CategoryService {
   constructor(private readonly PrismaServices:PrismaService){}
   async Create_Categories(createCategoryDto: CreateCategoryDto) {
-    return `This action returns add  all category`;
+    return this.PrismaServices.category.create({data:{
+      name:createCategoryDto.name,
+      description:createCategoryDto.description,
+    }})
 
   }
 
