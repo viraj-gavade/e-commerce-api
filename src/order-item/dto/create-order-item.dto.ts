@@ -1,9 +1,10 @@
 
+
 export class CreateOrderItemDto {
 
-    OrderId : number
+    orderId : number 
 
-    productId : number
+    productId : number 
 
     quantity : number
 
