@@ -37,4 +37,28 @@ export class UserService {
         return this.PrismaService.order.findMany({where:{userId:UserId}})
     }
 
+    async getUserSingleOrder(@Req() req:AuthenticatedRequest,orderId:number ){
+        const {UserId} = req.user
+   
+        return await this.PrismaService.order.findFirst({
+            where: {
+                userId: UserId, // Filter by authenticated user's UserId
+                id: orderId,    // Filter by the provided orderId
+            },
+        });
+    }
+
+    async DeleteUserSingleOrder(@Req() req:AuthenticatedRequest,orderId:number ){
+        const {UserId} = req.user
+   
+        const order =  await this.PrismaService.order.findFirst({
+            where: {
+                userId: UserId, // Filter by authenticated user's UserId
+                id: orderId,    // Filter by the provided orderId
+            },
+        });
+        await this.PrismaService.orderItem.delete({where:{orderId:order.id}})
+        return this.PrismaService.order.delete({where:{id:order.id}})
+    }
+
 }

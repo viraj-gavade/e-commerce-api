@@ -22,10 +22,19 @@ export class UserController {
     async get_user_orders(@Req() req:AuthenticatedRequest){
         return this.UserService.getUserOrders(req)
     }
+    @Get('my-orders/:orderId')
+    async get_user_single_order(@Param('orderId') orderId:string,@Req() req:AuthenticatedRequest){
+        return this.UserService.getUserSingleOrder(req,+orderId)
+    }
+
+    @Delete('my-orders/:orderId')
+    async delete_user_single_order(@Param('orderId') orderId:string,@Req() req:AuthenticatedRequest){
+        return this.UserService.DeleteUserSingleOrder(req,+orderId)
+    }
 
     
     @Get('panel/:id')
-    async find_single_user(@Param() user_id: number){
+    async find_single_user(@Param('id') user_id: number){
         return this.UserService.getSingleUser(user_id)
     }
     
