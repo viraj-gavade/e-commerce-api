@@ -9,6 +9,7 @@ export interface AuthenticatedRequest extends Request {
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
     use(req: AuthenticatedRequest, res: Response, next: NextFunction)  {
+      console.log('Acces Token:-',req.cookies)
     const token = req.cookies['access_token']; // Get the access token from cookies
 
     if (!token) {
@@ -17,7 +18,7 @@ export class AuthMiddleware implements NestMiddleware {
 
     try {
       // Replace 'your_jwt_secret' with your actual secret key
-      const decoded = jwt.verify(token, process.env.JWT_SECRETE);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
       // Attach the decoded user object to the request
       req.user = decoded;
@@ -25,6 +26,7 @@ export class AuthMiddleware implements NestMiddleware {
       // Proceed to the next middleware or route handler
       next();
     } catch (err) {
+      console.log(err)
       throw new UnauthorizedException('Invalid or expired access token');
     }
   }
