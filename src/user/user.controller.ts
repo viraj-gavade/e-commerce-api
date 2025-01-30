@@ -1,6 +1,8 @@
-import { Body, Controller,Delete,Get, Param, Patch } from '@nestjs/common';
+import { Body, Controller,Delete,Get, Param, Patch, Req } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/update-user-dto';
+import { AuthenticatedRequest  } from 'src/auth/auth.middleware';
+import { Request } from 'express';
 
 @Controller('user')
 export class UserController {
@@ -10,6 +12,11 @@ export class UserController {
     @Get()
     async find_all_users(){
         return this.UserService.getAllUsers()
+    }
+
+    @Get('profile')
+    async get_user_profile(@Req() req:AuthenticatedRequest){
+        return this.UserService.getUserProfile(req)
     }
 
     

@@ -9,7 +9,6 @@ export interface AuthenticatedRequest extends Request {
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
     use(req: AuthenticatedRequest, res: Response, next: NextFunction)  {
-      console.log('Acces Token:-',req.cookies)
     const token = req.cookies['access_token']; // Get the access token from cookies
 
     if (!token) {
