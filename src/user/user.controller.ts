@@ -9,7 +9,7 @@ export class UserController {
     constructor(private readonly UserService:UserService){}
 
   
-    @Get()
+    @Get('/panel')
     async find_all_users(){
         return this.UserService.getAllUsers()
     }
@@ -20,19 +20,19 @@ export class UserController {
     }
 
     
-    @Get()
+    @Get('panel/:id')
     async find_single_user(@Param() user_id: number){
         return this.UserService.getSingleUser(user_id)
     }
     
     
-    @Delete()
+    @Delete('panel/:id')
     async delete_user(@Param() user_id: number){
         return this.UserService.deleteUser(user_id)
 
     }
 
-    @Patch()
+    @Patch('panel/:id')
     async update_user(@Param() user_id: number, @Body() UpdateUserDto:UpdateUserDto){
         return this.UserService.updateUser(user_id, UpdateUserDto)
     }

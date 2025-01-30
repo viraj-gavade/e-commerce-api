@@ -36,7 +36,7 @@ export class AuthService {
         if (!isPasswordCorrect) {
             return response.status(401).json({ message: 'Invalid email or password' });
         }
-        const payload = {UserId:User.id, username : User.username}
+        const payload = {UserId:User.id, username : User.username,role:User.role}
         const acccessToken = this.JwtService.sign(payload)
         response.cookie('access_token', acccessToken);
    

@@ -7,7 +7,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
-  @Post('add')
+  @Post('panel')
   create(@Body() createProductDto: CreateProductDto) {
     return this.productService.Create_Products(createProductDto);
   }
@@ -22,12 +22,12 @@ export class ProductController {
     return this.productService.findOne_Products(+id);
   }
 
-  @Patch(':id')
+  @Patch('panel/:id')
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
     return this.productService.update_Products(+id, updateProductDto);
   }
 
-  @Delete(':id')
+  @Delete('panel/:id')
   remove(@Param('id') id: string) {
     return this.productService.remove_Products(+id);
   }

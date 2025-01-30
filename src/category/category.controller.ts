@@ -7,7 +7,7 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  @Post('add')
+  @Post('panel')
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoryService.Create_Categories(createCategoryDto);
   }
@@ -22,12 +22,12 @@ export class CategoryController {
     return this.categoryService.findOne_Categories(+id);
   }
 
-  @Patch(':id')
+  @Patch('panel/:id')
   update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
     return this.categoryService.update_Categories(+id, updateCategoryDto);
   }
 
-  @Delete(':id')
+  @Delete('panel/:id')
   remove(@Param('id') id: string) {
     return this.categoryService.remove_Categories(+id);
   }

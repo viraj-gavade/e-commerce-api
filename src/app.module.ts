@@ -11,6 +11,7 @@ import { OrderModule } from './order/order.module';
 import { OrderItemModule } from './order-item/order-item.module';
 import { ProductModule } from './product/product.module';
 import { CategoryModule } from './category/category.module';
+import { AdminMiddleware } from './auth/admin.midddleware';
 @Module({
   imports: [PrismaModule, AuthModule, UserModule, OrderModule,OrderItemModule , OrderItemModule, ProductModule,CategoryModule],
   controllers: [AppController],
@@ -20,6 +21,10 @@ export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthMiddleware)
-      .forRoutes('/user','/order',''); // Apply middleware to all routes or specific ones
+      .forRoutes('/order','/user'); // Apply middleware to all routes or specific ones
+
+      consumer
+      .apply(AuthMiddleware,AdminMiddleware)
+      .forRoutes('/category/panel/','/user/panel/',);
   }
 }
