@@ -13,12 +13,12 @@ export class OrderController {
     return this.orderService.create_Order(createOrderDto);
   }
 
-  @Get()
+  @Get('panel')
   findAll() {
     return this.orderService.findAll_Order();
   }
 
-  @Get(':id')
+  @Get('panel/:id')
   findOne(@Param('id') id: string) {
     return this.orderService.findOne_Order(+id);
   }
@@ -28,7 +28,7 @@ export class OrderController {
   //   return this.orderService.update_Order(+id, updateOrderDto);
   // }
 
-  @Delete(':id')
+  @Delete('panel/:id')
   remove(@Param('id') id: string) {
     return this.orderService.remove_Order(+id);
   }

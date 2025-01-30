@@ -18,6 +18,10 @@ export class UserController {
     async get_user_profile(@Req() req:AuthenticatedRequest){
         return this.UserService.getUserProfile(req)
     }
+    @Get('my-orders')
+    async get_user_orders(@Req() req:AuthenticatedRequest){
+        return this.UserService.getUserOrders(req)
+    }
 
     
     @Get('panel/:id')

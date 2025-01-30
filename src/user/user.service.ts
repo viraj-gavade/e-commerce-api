@@ -31,4 +31,10 @@ export class UserService {
         )
     }
 
+    async getUserOrders(@Req() req:AuthenticatedRequest ){
+        const {UserId} = req.user
+   
+        return this.PrismaService.order.findMany({where:{userId:UserId}})
+    }
+
 }
