@@ -29,12 +29,12 @@ export class OrderService {
   }
 
   findOne_Order(id: number) {
-    return this.Pr;
+    return this.PrismaService.order.findUnique({where:{id:id}});
   }
 
-  update_Order(id: number, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
-  }
+  // update_Order(id: number, updateOrderDto: UpdateOrderDto) {
+  //   return this.PrismaService.order.update({where:{id},data:UpdateOrderDto})
+  // }
 
   remove_Order(id: number) {
     return `This action removes a #${id} order`;
