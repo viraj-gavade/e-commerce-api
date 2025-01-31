@@ -34,27 +34,39 @@ export class CategoryService {
   }
 
  async findOne_Categories(id: number) {
-    const category = await this.PrismaServices.category.findUnique({where:{id:id}}) 
-    if(!category){
-      return {message:"Category not found"};
-    }
-    return category
+   try {
+     const category = await this.PrismaServices.category.findUnique({where:{id:id}}) 
+     if(!category){
+       return {message:"Category not found"};
+     }
+     return category
+   } catch (error) {
+    console.log(error)
+   }
   }
 
  async update_Categories(id: number, updateCategoryDto: UpdateCategoryDto) {
-    const category = await this.PrismaServices.category.update({where:{id},data:updateCategoryDto})
-    if(!category){
-      return {message:"Category not found"};
-
-    }
-    return { category, message: "Category Updated Successfully"};
+   try {
+     const category = await this.PrismaServices.category.update({where:{id},data:updateCategoryDto})
+     if(!category){
+       return {message:"Category not found"};
+ 
+     }
+     return { category, message: "Category Updated Successfully"};
+   } catch (error) {
+    console.log(error)
+   }
   }
 
   async remove_Categories(id: number) {
-    const category = await this.PrismaServices.category.delete({where:{id}})
-    if(!category){
-      return {message:"Category not found"};
-    }
-    return {category, message: "Category Deleted Successfully"};
+  try {
+      const category = await this.PrismaServices.category.delete({where:{id}})
+      if(!category){
+        return {message:"Category not found"};
+      }
+      return {category, message: "Category Deleted Successfully"};
+  } catch (error) {
+    console.log(error)
+  }
   }
 }
