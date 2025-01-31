@@ -12,22 +12,22 @@ export class OrderItemController {
     return this.orderItemService.create_orderItem(createOrderItemDto);
   }
 
-  @Get()
+  @Get('panel')
   findAll() {
     return this.orderItemService.findAll_orderItem();
   }
 
-  @Get(':id')
+  @Get('panel/:id')
   findOne(@Param('id') id: string) {
     return this.orderItemService.findOne_orderItem(+id);
   }
 
-  @Patch(':id')
+  @Patch('panel/:id')
   update(@Param('id') id: string, @Body() updateOrderItemDto: UpdateOrderItemDto) {
     return this.orderItemService.update_orderItem(+id, updateOrderItemDto);
   }
 
-  @Delete(':id')
+  @Delete('panel/:id')
   remove(@Param('id') id: string) {
     return this.orderItemService.remove_orderItem(+id);
   }

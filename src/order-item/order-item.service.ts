@@ -6,23 +6,73 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class OrderItemService {
   constructor(private readonly PrismaService:PrismaService){}
-  create_orderItem(createOrderItemDto: CreateOrderItemDto) {
-    return this.PrismaService.orderItem.create({data:createOrderItemDto})
+  async create_orderItem(createOrderItemDto: CreateOrderItemDto) {
+    try {
+      const { orderId, productId, quantity,price } = createOrderItemDto;
+      const orderItem = await  this.PrismaService.orderItem.create({data:{
+        orderId,
+        productId,
+        quantity,
+        price
+      }})
+      if(!orderItem){
+        return {message:' order items not created',status:401}
+      }
+      return {orderItem,message:"Order items created successfully",status:201}
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  findAll_orderItem() {
-    return this.PrismaService.orderItem.findMany()
+  async findAll_orderItem() {
+    try {
+      const orderItems = await this.PrismaService.orderItem.findMany()
+      if(orderItems.length === 0){
+        return {message:'No order items found',status:404}
+      }
+      return {orderItems,message:"Order items fetched successfully",status:201}
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  findOne_orderItem(id: number) {
-    return this.PrismaService.orderItem.findUnique({where:{id}})
+  async findOne_orderItem(id: number) {
+   try {
+     const orderItem = await this.PrismaService.orderItem.findUnique({where:{id}})
+     if(!orderItem){
+       return {message:'No order items found',status:404}
+     }
+     return {orderItem,message:"Order item fetched successfully",status:201}
+   } catch (error) {
+    console.log(error)
+   }
   }
 
-  update_orderItem(id: number, updateOrderItemDto: UpdateOrderItemDto) {
-    return this.PrismaService.orderItem.update({where:{id},data:updateOrderItemDto})
+  async update_orderItem(id: number, updateOrderItemDto: UpdateOrderItemDto) {
+   try {
+     const { quantity,price } = updateOrderItemDto;
+     const orderItem = await this.PrismaService.orderItem.update({where:{id},data:{
+       quantity,
+       price
+     }})
+     if(!orderItem){
+       return {message:'No order items found',status:404}
+     }
+     return {orderItem,message:"Order items updated successfully",status:201}
+   } catch (error) {
+    console.log(error)
+   }
   }
 
-  remove_orderItem(id: number) {
-    return this.PrismaService.orderItem.delete({where:{id}})
+  async remove_orderItem(id: number) {
+   try {
+     const orderItem = await this.PrismaService.orderItem.delete({where:{id}})
+     if(!orderItem){
+       return {message:'No order items found',status:404}
+     }
+     return {orderItem,message:"Order items deleted successfully",status:201}
+   } catch (error) {
+    console.log(error)
+   }
   }
 }
