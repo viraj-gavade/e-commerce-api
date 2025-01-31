@@ -7,27 +7,54 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class CategoryService {
   constructor(private readonly PrismaServices:PrismaService){}
   async Create_Categories(createCategoryDto: CreateCategoryDto) {
-    return this.PrismaServices.category.create({data:{
-      name:createCategoryDto.name,
-      description:createCategoryDto.description,
-      parentId:createCategoryDto.parentId
-    }})
+  try {
+      const category = await  this.PrismaServices.category.create({data:{
+        name:createCategoryDto.name,
+        description:createCategoryDto.description,
+        parentId:createCategoryDto.parentId
+      }})
+      return {category:category,message:"Category Created Successfully"};
+  } catch (error) {
+    console.log('Something went wrong while creating the category',error)
+  }
 
   }
 
-  findAll_Categories() {
-   return this.PrismaServices.category.findMany({where:{parentId:null}})
+ async findAll_Categories() {
+  try {
+     const categories = await this.PrismaServices.category.findMany({where:{parentId:null}})
+     if(categories.length===0){
+      return {message:"No categories found"};
+     }
+     return categories
+  } catch (error) {
+    console.log('Something went wrong while fetching the categories',error)
+    
+  }
   }
 
-  findOne_Categories(id: number) {
-    return this.PrismaServices.category.findUnique({where:{id}})
+ async findOne_Categories(id: number) {
+    const category = await this.PrismaServices.category.findUnique({where:{id:id}}) 
+    if(!category){
+      return {message:"Category not found"};
+    }
+    return category
   }
 
-  update_Categories(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return this.PrismaServices.category.update({where:{id},data:updateCategoryDto})
+ async update_Categories(id: number, updateCategoryDto: UpdateCategoryDto) {
+    const category = await this.PrismaServices.category.update({where:{id},data:updateCategoryDto})
+    if(!category){
+      return {message:"Category not found"};
+
+    }
+    return { category, message: "Category Updated Successfully"};
   }
 
-  remove_Categories(id: number) {
-    return this.PrismaServices.category.delete({where:{id}})
+  async remove_Categories(id: number) {
+    const category = await this.PrismaServices.category.delete({where:{id}})
+    if(!category){
+      return {message:"Category not found"};
+    }
+    return {category, message: "Category Deleted Successfully"};
   }
 }
