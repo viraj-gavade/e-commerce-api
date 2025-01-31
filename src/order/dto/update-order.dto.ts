@@ -5,11 +5,6 @@ import { ValidateNested } from "class-validator";
 import { CreateOrderItemDto } from "src/order-item/dto/create-order-item.dto";
 export class UpdateOrderDto {
   
-    @IsArray()
-    @ValidateNested({ each: true })
-    @Type(() => CreateOrderItemDto)
-    orderItems: CreateOrderItemDto[];
-  
     @IsNumber()
     totalPrice: number;
   
