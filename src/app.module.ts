@@ -21,7 +21,7 @@ export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthMiddleware)
-      .forRoutes('/order','/user'); // Apply middleware to all routes or specific ones
+      .forRoutes('/order','/user/my-orders','/user/my-profile'); // Apply middleware to all routes or specific ones
 
       consumer
       .apply(AuthMiddleware,AdminMiddleware)

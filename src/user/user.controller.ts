@@ -14,7 +14,7 @@ export class UserController {
         return this.UserService.getAllUsers()
     }
 
-    @Get('profile')
+    @Get('my-profile')
     async get_user_profile(@Req() req:AuthenticatedRequest){
         return this.UserService.getUserProfile(req)
     }
