@@ -27,10 +27,10 @@ export class UserController {
         return this.UserService.getUserSingleOrder(req,+orderId)
     }
 
-    @Delete('my-orders/:orderId')
-    async delete_user_single_order(@Param('orderId') orderId:string,@Req() req:AuthenticatedRequest){
-        return this.UserService.DeleteUserSingleOrder(req,+orderId)
-    }
+    // @Delete('my-orders/:orderId')
+    // async delete_user_single_order(@Param('orderId') orderId:string,@Req() req:AuthenticatedRequest){
+    //     return this.UserService.DeleteUserSingleOrder(req,+orderId)
+    // }
 
     
     @Get('panel/:id')

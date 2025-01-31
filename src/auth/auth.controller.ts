@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { SignInUser_Dto } from './dto/user-signin-dto';
 import { SignUpUser_Dto } from './dto/user-signup-dto';
 import { Response } from 'express';
+import { Role } from 'src/common/enums/roles.enums';
 
 @Controller('auth')
 export class AuthController {
@@ -10,7 +11,7 @@ export class AuthController {
     @Post('register')
   async  register_user(@Body() SignUpUser_Dto:SignUpUser_Dto ,
     @Res({ passthrough: true }) response: any, ){
-        return this.AuthServices.SignUpUser(SignUpUser_Dto.username,SignUpUser_Dto.email,SignUpUser_Dto.password,SignUpUser_Dto.address,SignUpUser_Dto.firstName,SignUpUser_Dto.lastName,SignUpUser_Dto.phone)
+        return this.AuthServices.SignUpUser(SignUpUser_Dto)
     }
 
     @Post('login')

@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user-dto';
 import { AuthenticatedRequest } from 'src/auth/auth.middleware';
 
 
+
 @Injectable()
 export class UserService {
     constructor(private readonly PrismaService: PrismaService) {}
@@ -108,12 +109,13 @@ export class UserService {
    }
     }
 
-    async DeleteUserSingleOrder(@Req() req:AuthenticatedRequest,orderId:number ){
-        const order = await this.getUserSingleOrder(req,orderId)
-        if(!order){
-            return {message:"Order not found",status:404}
-        }
-        await this.PrismaService.order.delete({where:{id:order.id}})
-    }
+    // async DeleteUserSingleOrder(@Req() req:AuthenticatedRequest,orderId:number ){
+    //     const order = await this.getUserSingleOrder(req,orderId)
+    //     console.log(order)
+    //     if(!order){
+    //         return {message:"Order not found",status:404}
+    //     }
+    //     await this.PrismaService.order.delete({where:{id:order.id}})
+    // }
 
 }

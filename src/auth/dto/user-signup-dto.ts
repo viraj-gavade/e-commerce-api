@@ -1,5 +1,5 @@
-import { IsEmail,IsString,IsNotEmpty , MinLength ,IsArray ,IsOptional} from "class-validator";
-
+import { IsEmail,IsString,IsNotEmpty , MinLength ,IsArray ,IsOptional ,IsEnum} from "class-validator";
+import { Role } from "src/common/enums/roles.enums";
 export class SignUpUser_Dto {
     @IsString()
     @IsNotEmpty()
@@ -31,4 +31,8 @@ export class SignUpUser_Dto {
     @IsString()
     @IsNotEmpty()
     address:string
+
+    @IsEnum(Role)
+  @IsNotEmpty()
+  role: Role;
 }
