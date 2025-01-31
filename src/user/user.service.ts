@@ -146,12 +146,29 @@ export class UserService {
     }
     
 
-//    async DeleteSingleOrderItem(@Req() req:AuthenticatedRequest,itemId:number ){
-//     const order = await this.PrismaService.orderItem.delete({where:{id:itemId,userId:req.user.UserId}})
-//     if(!order){
-//         return {message:"Order not found",status:404}
-//     }
-//     return { message : "Order deleted successfylly!"}
-//    }
+    async DeleteOrderItem(@Req() req: AuthenticatedRequest, @Param() orderItemId: number) {
+        try {
+            const { UserId } = req.user;
+    
+            // Check if the order item belongs to the authenticated user
+            const orderItem = await this.PrismaService.orderItem.findUnique({
+                where: { id: orderItemId },
+                include: { order: true }, // Include order details to check userId
+            });
+    
+            if (!orderItem || orderItem.order.userId !== UserId) {
+                return { message: "Order item not found or you don't have permission to delete this item", status: 404 };
+            }
+    
+            // Delete the order item
+            await this.PrismaService.orderItem.delete({ where: { id: orderItemId } });
+    
+            return { message: "Order item deleted successfully", status: 200 };
+        } catch (error) {
+            console.log(error);
+            return { message: "An error occurred", status: 500 };
+        }
+    }
+    
 
 }

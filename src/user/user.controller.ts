@@ -32,9 +32,9 @@ export class UserController {
         return this.UserService.DeleteSingleOrder(req,+orderId)
     }
 
-    @Delete('my-orders/:itemId')
+    @Delete('my-orders/item/:itemId')
     async delete_user_single_order_item(@Param('itemId') itemId:string,@Req() req:AuthenticatedRequest){
-        return this.UserService.DeleteSingleOrder(req,+itemId)
+        return this.UserService.DeleteOrderItem(req,+itemId)
     }
 
     
