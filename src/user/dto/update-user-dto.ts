@@ -6,8 +6,6 @@ export class UpdateUserDto{
     @IsNotEmpty()
     firstName:string
 
-    @IsString()
-    @IsNotEmpty()
 
     @IsString()
     @IsNotEmpty()

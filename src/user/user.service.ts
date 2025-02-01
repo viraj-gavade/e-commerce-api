@@ -1,4 +1,4 @@
-import { All, Injectable, Req,Param } from '@nestjs/common';
+import { All, Injectable, Req,Param, Body } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateUserDto } from './dto/update-user-dto';
 import { AuthenticatedRequest } from 'src/auth/auth.middleware';
@@ -14,7 +14,16 @@ export class UserService {
     async getUserProfile(@Req() req:AuthenticatedRequest ){
        try {
          const {UserId} = req.user
-         const user =  this.PrismaService.user.findUnique({where:{id:UserId}})
+         const user =  this.PrismaService.user.findUnique({where:{id:UserId},select:{
+            id:true,
+            username:true,
+            email:true,
+            firstName:true,
+            lastName:true,
+            role:true,
+            address:true,
+            phone:true
+         }})
          if(!user){
              return {message:'User not found',status:404}
          }
@@ -24,7 +33,20 @@ export class UserService {
        }
     }
 
-
+    async UpdateUserProfile(@Req() req:AuthenticatedRequest, @Body() UpdateUserDto:UpdateUserDto ){
+        try {
+          const {UserId} = req.user
+          const user =  await this.PrismaService.user.update({where:{id:UserId},data:UpdateUserDto})
+          console.log('User',user)
+          if(!user){
+              return {message:'User not found',status:404}
+          }
+          return {user,message:"User update successfully!"}
+        } catch (error) {
+         console.log(error)
+        }
+     }
+ 
 
     async getSingleUser(user_id:number){
         try {
