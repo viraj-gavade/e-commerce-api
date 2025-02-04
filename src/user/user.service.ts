@@ -37,7 +37,6 @@ export class UserService {
         try {
           const {UserId} = req.user
           const user =  await this.PrismaService.user.update({where:{id:UserId},data:UpdateUserDto})
-          console.log('User',user)
           if(!user){
               return {message:'User not found',status:404}
           }

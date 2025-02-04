@@ -51,6 +51,7 @@ export class OrderController {
   @Patch('panel/:id')
   async update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
    try {
+   
      const order = await this.orderService.update_Order(+id, updateOrderDto);
      if(!order){
        return {message: 'Order not updated', status: 400}
