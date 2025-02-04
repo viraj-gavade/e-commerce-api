@@ -1,0 +1,13 @@
+service: nestjs-api
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  authLogin:
+    handler: dist/functions/auth/login.handler
+    events:
+      - http:
+          path: auth/login
+          method: post
